@@ -10,6 +10,7 @@ import ShopPage from "./pages/shop/shop.component.jsx";
 import Header from "./components/header/header.component.jsx";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import { selectCurrentUser } from "./redux/user/user.selectors";
+import CheckoutPage from "./pages/checkout/checkout.component";
 class App extends React.Component {
 	unsubscribeFromAuth = null;
 	componentDidMount() {
@@ -39,6 +40,7 @@ class App extends React.Component {
 				<Header />
 				<Switch>
 					<Route exact path="/" component={HomePage} />
+					<Route exact path="/checkout" component={CheckoutPage} />
 					<Route path="/shop" component={ShopPage} />
 					<Route
 						exact

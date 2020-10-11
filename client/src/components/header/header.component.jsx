@@ -9,7 +9,7 @@ import CardDropDown from "../cart-dropdown/cart-dropdown.component";
 import "./header.styles.scss";
 import CartDropDown from "../cart-dropdown/cart-dropdown.component";
 
-const Header = ({ currentUser }) => (
+const Header = ({ currentUser, hidden }) => (
 	<div className="header">
 		<Link className="logo-container" to="/">
 			<Logo className="logo" />
@@ -32,12 +32,15 @@ const Header = ({ currentUser }) => (
 			)}
 			<CartIcon />
 		</div>
-		<CartDropDown />
+		{hidden ? null : <CartDropDown />}
 	</div>
 );
 // this is the root reducer (state), have key of user in root reducer which gets us user reducer and user reducer has currentUser property
-const mapStateToProps = (state) => ({
-	currentUser: state.user.currentUser,
+// destructure nested values from state so first is saying get the user from state and the user nested value of currentUser
+// user and cart are both keys of the root reducer and then since going to individual reducer can get nested value
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+	currentUser,
+	hidden,
 });
 
 // pass root reducer to connect

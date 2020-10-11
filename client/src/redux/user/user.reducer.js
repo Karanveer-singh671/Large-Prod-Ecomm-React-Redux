@@ -1,3 +1,4 @@
+import { UserActionTypes } from "./user.types";
 // when fire state for first time it will be nothing so need to set the initial state of the reducer similar to class component state when mounts
 const INITIAL_STATE = {
 	currentUser: null,
@@ -7,7 +8,7 @@ const INITIAL_STATE = {
 // default parameter will be INITIAL_STATE
 const userReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
-		case "SET_CURRENT_USER":
+		case UserActionTypes.SET_CURRENT_USER:
 			return {
 				...state,
 				currentUser: action.payload,

@@ -1,6 +1,6 @@
 import React from "react";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import "./App.css";
 import { connect } from "react-redux";
 import { SetCurrentUser } from "./redux/user/user.actions";
@@ -39,12 +39,30 @@ class App extends React.Component {
 				<Switch>
 					<Route exact path="/" component={HomePage} />
 					<Route path="/shop" component={ShopPage} />
-					<Route path="/signin" component={SignInAndSignUpPage} />
+					<Route
+						exact
+						path="/signin"
+						// on signup if currentUser set then redirect else display the signin signup
+						// user reducer done w mapStateToProps 
+						render={() =>
+							this.props.currentUser ? (
+								<Redirect to="/" />
+							) : (
+								<SignInAndSignUpPage />
+							)
+						}
+					/>
 				</Switch>
 			</div>
 		);
 	}
 }
+// user reducer pass in
+// now after executes have access to currentUser property inside this.props
+const mapStateToProps = ({ user }) => ({
+	currentUser: user.currentUser,
+});
+
 // dispatch new action trying to pass
 const mapDispatchToProps = (dispatch) => ({
 	// whatever inside dispatch is the action that want to pass to every reducer
@@ -54,6 +72,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 // don't need any state from root reducer since doesn't do anything with currentUser in the render
 // header needed currentUser so passed in mapStateToProps for that component instead
-// and fire a dispatch action so that state is updated and Header can pull the new state from store instead of passing 
+// and fire a dispatch action so that state is updated and Header can pull the new state from store instead of passing
 // as props from app
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

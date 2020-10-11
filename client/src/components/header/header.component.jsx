@@ -4,8 +4,10 @@ import { auth } from "../../firebase/firebase.utils";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { connect } from "react-redux";
 import CartIcon from "../cart-icon/cart-icon.component";
+import CardDropDown from "../cart-dropdown/cart-dropdown.component";
 
 import "./header.styles.scss";
+import CartDropDown from "../cart-dropdown/cart-dropdown.component";
 
 const Header = ({ currentUser }) => (
 	<div className="header">
@@ -30,6 +32,7 @@ const Header = ({ currentUser }) => (
 			)}
 			<CartIcon />
 		</div>
+		<CartDropDown />
 	</div>
 );
 // this is the root reducer (state), have key of user in root reducer which gets us user reducer and user reducer has currentUser property

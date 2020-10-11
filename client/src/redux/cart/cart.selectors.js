@@ -8,7 +8,10 @@ export const selectCartItems = createSelector(
 	// if have selectUser = (state) => state.user then just use user as input
 	(cart) => cart.cartItems
 );
-
+export const selectCartHidden = createSelector(
+	[selectCart],
+	(cart) => cart.hidden
+);
 export const selectCartItemsCount = createSelector(
 	[selectCartItems],
 	(cartItems) => cartItems.reduce((acc, cartItem) => acc + cartItem.quantity, 0)

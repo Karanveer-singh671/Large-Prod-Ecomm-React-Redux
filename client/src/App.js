@@ -4,11 +4,12 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import "./App.css";
 import { connect } from "react-redux";
 import { SetCurrentUser } from "./redux/user/user.actions";
-
+import { createStructuredSelector } from "reselect";
 import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component.jsx";
 import Header from "./components/header/header.component.jsx";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
+import { selectCurrentUser } from "./redux/user/user.selectors";
 class App extends React.Component {
 	unsubscribeFromAuth = null;
 	componentDidMount() {
@@ -43,7 +44,7 @@ class App extends React.Component {
 						exact
 						path="/signin"
 						// on signup if currentUser set then redirect else display the signin signup
-						// user reducer done w mapStateToProps 
+						// user reducer done w mapStateToProps
 						render={() =>
 							this.props.currentUser ? (
 								<Redirect to="/" />
@@ -59,8 +60,8 @@ class App extends React.Component {
 }
 // user reducer pass in
 // now after executes have access to currentUser property inside this.props
-const mapStateToProps = ({ user }) => ({
-	currentUser: user.currentUser,
+const mapStateToProps = createStructuredSelector({
+	currentUser: selectCurrentUser,
 });
 
 // dispatch new action trying to pass

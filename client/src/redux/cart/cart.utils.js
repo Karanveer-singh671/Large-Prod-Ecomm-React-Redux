@@ -15,3 +15,21 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
 	// every time after trying to increase quantity and exists can reference current quantity of 1
 	return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
 };
+
+export const removeItemFromCart = (CartItems, cartItemToRemove) => {
+	// find the cart Item that want to remove
+	const existingCartItem = CartItems.find(
+		(cartItem) => cartItem.id === cartItem.cartItemToRemove.id
+	);
+	// remove from page if quantity is 1
+	if (existingCartItem.quantity === 1) {
+		return CartItems.filter((cartItem) => cartItem.id !== existingCartItem.id);
+	}
+	// check if cartItemId is one to remove > 1 then cart Item will need to spread operator (get all properties) cartItem except want quantity - 1
+	return CartItems.map((cartItem) =>
+		cartItem.id === cartItemToRemove
+			? { ...cartItem, quantity: cartItem.quantity - 1 }
+			: // otherwise it will just be the cartItem
+			  cartItem
+	);
+};

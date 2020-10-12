@@ -4,13 +4,17 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import App from "./App";
-import store from "./redux/store";
-
+// curly brace (exporting more than 1 var)
+import { store, persistor } from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
+// wrap app in PersistGate so it has access to Persist flow  also rehydrate state when app refreshes
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
 			<BrowserRouter>
-				<App />
+				<PersistGate persistor={persistor}>
+					<App />
+				</PersistGate>
 			</BrowserRouter>
 		</Provider>
 	</React.StrictMode>,

@@ -45,8 +45,6 @@ class App extends React.Component {
 					<Route
 						exact
 						path="/signin"
-						// on signup if currentUser set then redirect else display the signin signup
-						// user reducer done w mapStateToProps
 						render={() =>
 							this.props.currentUser ? (
 								<Redirect to="/" />

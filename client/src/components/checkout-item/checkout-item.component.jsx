@@ -32,6 +32,7 @@ const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
 		</div>
 	);
 };
+// now this action is going to be available as a prop
 const mapDispatchToProps = (dispatch) => ({
 	clearItem: (item) => dispatch(clearItemFromCart(item)),
 	addItem: (item) => dispatch(addItem(item)),

@@ -7,7 +7,7 @@ import App from "./App";
 // curly brace (exporting more than 1 var)
 import { store, persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
-// wrap app in PersistGate so it has access to Persist flow  also rehydrate state when app refreshes
+// wrap app in PersistGate so it has access to Persist flow  also rehydrate state with what had before refresh when app refreshes
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>

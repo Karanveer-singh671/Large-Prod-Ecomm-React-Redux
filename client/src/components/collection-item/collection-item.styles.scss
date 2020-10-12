@@ -1,5 +1,6 @@
 .collection-item {
-	width: 22%;
+	// INSTEAD OF 22% use vw since percent uses percent of the containing div, want 22% of window width
+	width: 22vw;
 	display: flex;
 	flex-direction: column; // allows footer and image to sit in vertical alighnment
 	height: 350px;

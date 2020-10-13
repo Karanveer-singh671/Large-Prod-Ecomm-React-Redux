@@ -6,32 +6,35 @@ import { connect } from "react-redux";
 import CartIcon from "../cart-icon/cart-icon.component";
 import { createStructuredSelector } from "reselect";
 import { selectCartHidden } from "../../redux/cart/cart.selectors";
-import "./header.styles.scss";
 import CartDropDown from "../cart-dropdown/cart-dropdown.component";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
+import {
+	HeaderContainer,
+	LogoContainer,
+	OptionsContainer,
+	OptionLink,
+} from "./header.styles";
 
 const Header = ({ currentUser, hidden }) => (
-	<div className="header">
-		<Link className="logo-container" to="/">
+	<HeaderContainer>
+		<LogoContainer to="/">
 			<Logo className="logo" />
-		</Link>
-		<div className="options">
-			<Link className="option" to="/shop">
+		</LogoContainer>
+		<OptionsContainer>
+			<OptionLink className="option" to="/shop">
 				Shop
-			</Link>
+			</OptionLink>
 			{currentUser ? (
-				<div className="option" onClick={() => auth.signOut()}>
+				<OptionLink as="div" className="option" onClick={() => auth.signOut()}>
 					Sign Out
-				</div>
+				</OptionLink>
 			) : (
-				<Link className="option" to="/signin">
-					Sign In
-				</Link>
+				<OptionsContainer to="/signin">Sign In</OptionsContainer>
 			)}
 			<CartIcon />
-		</div>
+		</OptionsContainer>
 		{hidden ? null : <CartDropDown />}
-	</div>
+	</HeaderContainer>
 );
 // this is the root reducer (state), have key of user in root reducer which gets us user reducer and user reducer has currentUser property
 // destructure nested values from state so first is saying get the user from state and the user nested value of currentUser

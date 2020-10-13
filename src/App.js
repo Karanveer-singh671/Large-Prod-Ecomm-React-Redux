@@ -32,7 +32,13 @@ class App extends React.Component {
 				});
 			} else {
 				SetCurrentUser(userAuth);
-				addCollectionAndDocuments("collections", collectionsArray);
+				addCollectionAndDocuments(
+					"collections",
+					// destructure each obj in the map and return an obj with only the title and items in the object
+					// return array with only the properties want to keep and rest are not part of the new array
+					// then can pass a argument 
+					collectionsArray.map(({ title, items }) => ({ title, items }))
+				);
 			}
 		});
 	}

@@ -28,3 +28,7 @@ export const OptionContainerStyles = css`
 export const OptionLink = styled(Link)`
 	${OptionContainerStyles}
 `;
+// do not need
+export const OptionDiv = styled.div`
+	${OptionContainerStyles}
+`;

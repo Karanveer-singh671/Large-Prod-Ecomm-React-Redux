@@ -1,5 +1,9 @@
 import React from "react";
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import {
+	addCollectionAndDocuments,
+	auth,
+	createUserProfileDocument,
+} from "./firebase/firebase.utils";
 import { Switch, Route, Redirect } from "react-router-dom";
 import "./App.css";
 import { connect } from "react-redux";
@@ -11,10 +15,11 @@ import Header from "./components/header/header.component.jsx";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 import CheckoutPage from "./pages/checkout/checkout.component";
+import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
 class App extends React.Component {
 	unsubscribeFromAuth = null;
 	componentDidMount() {
-		const { SetCurrentUser } = this.props;
+		const { SetCurrentUser, collectionsArray } = this.props;
 		this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
 			if (userAuth) {
 				const userRef = await createUserProfileDocument(userAuth);
@@ -27,6 +32,7 @@ class App extends React.Component {
 				});
 			} else {
 				SetCurrentUser(userAuth);
+				addCollectionAndDocuments("collections", collectionsArray);
 			}
 		});
 	}
@@ -62,6 +68,7 @@ class App extends React.Component {
 // now after executes have access to currentUser property inside this.props
 const mapStateToProps = createStructuredSelector({
 	currentUser: selectCurrentUser,
+	collectionsArray: selectCollectionsForPreview,
 });
 
 // dispatch new action trying to pass

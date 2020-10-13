@@ -3,7 +3,10 @@ import { Route } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import { fetchCollectionsStartAsync } from "../../redux/shop/shop.actions";
-import { selectIsCollectionFetching } from "../../redux/shop/shop.selectors";
+import {
+	selectIsCollectionFetching,
+	selectIsCollectionsLoaded,
+} from "../../redux/shop/shop.selectors";
 
 import WithSpinner from "../../components/with-spinner/with-spinner.component";
 
@@ -21,9 +24,10 @@ class ShopPage extends React.Component {
 		// component mounts so perform the async request here and redux-thunk allowing redux to handle the async event
 		fetchCollectionsStartAsync();
 	}
-
+	// isLoading will be the inverted value of isCollectionLoaded for CollectionPageWithSpinner.
+	// If Collection is Loaded then isLoading is false path so need to add a bang in selector
 	render() {
-		const { match, isCollectionFetching } = this.props;
+		const { match, isCollectionFetching, isCollectionLoaded } = this.props;
 		return (
 			<div className="shop-page">
 				<Route
@@ -40,7 +44,7 @@ class ShopPage extends React.Component {
 					path={`${match.path}/:collectionId`}
 					render={(props) => (
 						<CollectionPageWithSpinner
-							isLoading={isCollectionFetching}
+							isLoading={!isCollectionLoaded}
 							{...props}
 						/>
 					)}
@@ -51,6 +55,7 @@ class ShopPage extends React.Component {
 }
 const mapStateToProps = createStructuredSelector({
 	isCollectionFetching: selectIsCollectionFetching,
+	isCollectionLoaded: selectIsCollectionsLoaded,
 });
 const mapDispatchToProps = (dispatch) => ({
 	fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync()),

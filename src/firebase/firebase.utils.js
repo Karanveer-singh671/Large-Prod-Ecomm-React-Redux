@@ -51,6 +51,13 @@ export const convertCollectionsSnapshotToMap = (collections) => {
 			items,
 		};
 	});
+
+	return transformedCollection.reduce((accumulator, collection) => {
+		// each index value is going to be title key and sets that key's value to collection
+		// make sure accumulator returned then will return object of all keys title and values for each of them
+		accumulator[collection.title.toLowerCase()] = collection
+		return accumulator
+	}, {})
 };
 
 export const addCollectionAndDocuments = async (

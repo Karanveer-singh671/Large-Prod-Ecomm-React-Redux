@@ -4,16 +4,19 @@ const buttonStyles = css`
 	background-color: black;
 	color: white;
 	border: none;
+
 	&:hover {
 		background-color: white;
 		color: black;
 		border: 1px solid black;
 	}
 `;
-export const invertedButtonStyles = css`
+
+const invertedButtonStyles = css`
 	background-color: white;
 	color: black;
 	border: 1px solid black;
+
 	&:hover {
 		background-color: black;
 		color: white;
@@ -21,7 +24,7 @@ export const invertedButtonStyles = css`
 	}
 `;
 
-export const googleSignInStyles = css`
+const googleSignInStyles = css`
 	background-color: #4285f4;
 	color: white;
 
@@ -35,11 +38,10 @@ const getButtonStyles = (props) => {
 	if (props.isGoogleSignIn) {
 		return googleSignInStyles;
 	}
+
 	return props.inverted ? invertedButtonStyles : buttonStyles;
 };
 
-// same syntax as sass supported but includes benefit of JS
-// can import function to see which button styles the CustomButtonContainer should contain
 export const CustomButtonContainer = styled.button`
 	min-width: 165px;
 	width: auto;
@@ -54,6 +56,5 @@ export const CustomButtonContainer = styled.button`
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
-
 	${getButtonStyles}
 `;

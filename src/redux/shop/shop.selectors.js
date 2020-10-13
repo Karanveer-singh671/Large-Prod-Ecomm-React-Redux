@@ -12,15 +12,15 @@ export const selectCollections = createSelector(
 
 export const selectCollectionsForPreview = createSelector(
 	[selectCollections],
-	(collections) => Object.keys(collections).map((key) => collections[key])
+	(collections) =>
+		collections ? Object.keys(collections).map((key) => collections[key]) : []
 );
 
 // wrap in memoize, whenever this function gets called and receieves collectionUrlParam memoizes return of the function
 // in this case returning a selector, if function gets called again w/ same collectionUrlParam don't rerun the function
 // just return selector that's been stored
 export const selectCollection = memoize((collectionUrlParam) =>
-	createSelector(
-		[selectCollections],
-		(collections) => collections[collectionUrlParam]
+	createSelector([selectCollections], (collections) =>
+		collections ? collections[collectionUrlParam] : null
 	)
 );

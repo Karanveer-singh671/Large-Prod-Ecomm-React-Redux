@@ -5,7 +5,12 @@ import { persistStore } from "redux-persist";
 
 import rootReducer from "./root-reducer";
 
-const middlewares = [logger];
+const middlewares = [];
+
+// create react app sets NODE_ENV and we can check if its development then we can see the redux logger else if prod we can't!
+if (process.env.NODE_ENV === "development") {
+	middlewares.push(logger);
+}
 
 export const store = createStore(rootReducer, applyMiddleware(...middlewares));
 // persisted version of store

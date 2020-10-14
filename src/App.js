@@ -7,7 +7,6 @@ import {
 import { Switch, Route, Redirect } from "react-router-dom";
 import "./App.css";
 import { connect } from "react-redux";
-import { SetCurrentUser } from "./redux/user/user.actions";
 import { createStructuredSelector } from "reselect";
 import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component.jsx";
@@ -19,32 +18,9 @@ import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
 class App extends React.Component {
 	unsubscribeFromAuth = null;
 	componentDidMount() {
-		const { SetCurrentUser, collectionsArray } = this.props;
-		// this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-		// 	if (userAuth) {
-		// 		const userRef = await createUserProfileDocument(userAuth);
-
-		// 		userRef.onSnapshot((snapshot) => {
-		// 			SetCurrentUser({
-		// 				id: snapshot.id,
-		// 				...snapshot.data(),
-		// 			});
-		// 		});
-		// 	} else {
-		// 		SetCurrentUser(userAuth);
-		// 		addCollectionAndDocuments(
-		// 			"collections",
-		// 			// destructure each obj in the map and return an obj with only the title and items in the object
-		// 			// return array with only the properties want to keep and rest are not part of the new array
-		// 			// then can pass a argument
-		// 			collectionsArray.map(({ title, items }) => ({ title, items }))
-		// 		);
-		// 	}
-		// });
+		const { currentUser, collectionsArray } = this.props;
 	}
-	componentWillUnmount() {
-		// this.unsubscribeFromAuth();
-	}
+	componentWillUnmount() {}
 
 	render() {
 		return (
@@ -81,7 +57,6 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = (dispatch) => ({
 	// whatever inside dispatch is the action that want to pass to every reducer
 	// the SetCurrentUser is inside the props in the store then can call it with data want so can trigger the action
-	SetCurrentUser: (user) => dispatch(SetCurrentUser(user)),
 });
 
 // don't need any state from root reducer since doesn't do anything with currentUser in the render

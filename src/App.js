@@ -15,10 +15,11 @@ import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up
 import { selectCurrentUser } from "./redux/user/user.selectors";
 import CheckoutPage from "./pages/checkout/checkout.component";
 import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
+import { checkUserSession } from "./redux/user/user.actions";
 class App extends React.Component {
 	unsubscribeFromAuth = null;
 	componentDidMount() {
-		const { currentUser, collectionsArray } = this.props;
+		const { checkUserSession } = this.props;
 	}
 	componentWillUnmount() {}
 
@@ -55,6 +56,7 @@ const mapStateToProps = createStructuredSelector({
 
 // dispatch new action trying to pass
 const mapDispatchToProps = (dispatch) => ({
+	checkUserSession: () => dispatch(checkUserSession()),
 	// whatever inside dispatch is the action that want to pass to every reducer
 	// the SetCurrentUser is inside the props in the store then can call it with data want so can trigger the action
 });

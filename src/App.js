@@ -20,30 +20,30 @@ class App extends React.Component {
 	unsubscribeFromAuth = null;
 	componentDidMount() {
 		const { SetCurrentUser, collectionsArray } = this.props;
-		this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-			if (userAuth) {
-				const userRef = await createUserProfileDocument(userAuth);
+		// this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+		// 	if (userAuth) {
+		// 		const userRef = await createUserProfileDocument(userAuth);
 
-				userRef.onSnapshot((snapshot) => {
-					SetCurrentUser({
-						id: snapshot.id,
-						...snapshot.data(),
-					});
-				});
-			} else {
-				SetCurrentUser(userAuth);
-				addCollectionAndDocuments(
-					"collections",
-					// destructure each obj in the map and return an obj with only the title and items in the object
-					// return array with only the properties want to keep and rest are not part of the new array
-					// then can pass a argument 
-					collectionsArray.map(({ title, items }) => ({ title, items }))
-				);
-			}
-		});
+		// 		userRef.onSnapshot((snapshot) => {
+		// 			SetCurrentUser({
+		// 				id: snapshot.id,
+		// 				...snapshot.data(),
+		// 			});
+		// 		});
+		// 	} else {
+		// 		SetCurrentUser(userAuth);
+		// 		addCollectionAndDocuments(
+		// 			"collections",
+		// 			// destructure each obj in the map and return an obj with only the title and items in the object
+		// 			// return array with only the properties want to keep and rest are not part of the new array
+		// 			// then can pass a argument
+		// 			collectionsArray.map(({ title, items }) => ({ title, items }))
+		// 		);
+		// 	}
+		// });
 	}
 	componentWillUnmount() {
-		this.unsubscribeFromAuth();
+		// this.unsubscribeFromAuth();
 	}
 
 	render() {

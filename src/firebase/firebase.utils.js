@@ -73,7 +73,6 @@ export const convertCollectionsSnapshotToMap = (collections) => {
 };
 
 export const getCurrentUser = () => {
-	// promise oriented solution that saga can yield for!
 	return new Promise((resolve, reject) => {
 		const unsubscribe = auth.onAuthStateChanged((userAuth) => {
 			unsubscribe();

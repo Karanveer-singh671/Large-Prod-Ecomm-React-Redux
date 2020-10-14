@@ -8,8 +8,8 @@ import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
 import { SignUpContainer, SignUpTitle } from "./signup.styles";
 
 class SignUp extends React.Component {
-	constructor(props) {
-		super(props);
+	constructor() {
+		super();
 
 		this.state = {
 			displayName: "",
@@ -18,19 +18,25 @@ class SignUp extends React.Component {
 			confirmPassword: "",
 		};
 	}
-	handleSubmit = async (e) => {
-		e.preventDefault();
+
+	handleSubmit = async (event) => {
+		event.preventDefault();
+
 		const { displayName, email, password, confirmPassword } = this.state;
+
 		if (password !== confirmPassword) {
-			alert("Passwords do not match");
+			alert("passwords don't match");
 			return;
 		}
+
 		try {
 			const { user } = await auth.createUserWithEmailAndPassword(
 				email,
 				password
 			);
+
 			await createUserProfileDocument(user, { displayName });
+
 			this.setState({
 				displayName: "",
 				email: "",
@@ -42,8 +48,9 @@ class SignUp extends React.Component {
 		}
 	};
 
-	handleChange = (e) => {
-		const { name, value } = e.target;
+	handleChange = (event) => {
+		const { name, value } = event.target;
+
 		this.setState({ [name]: value });
 	};
 

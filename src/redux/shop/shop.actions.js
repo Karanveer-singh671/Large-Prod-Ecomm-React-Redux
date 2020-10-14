@@ -1,10 +1,11 @@
 import ShopActionTypes from "./shop.types";
+
 import {
 	firestore,
 	convertCollectionsSnapshotToMap,
-} from "../../firebase/firebase.utils.js";
+} from "../../firebase/firebase.utils";
 
-export const fetchCollectionsStart = (collectionsMap) => ({
+export const fetchCollectionsStart = () => ({
 	type: ShopActionTypes.FETCH_COLLECTIONS_START,
 });
 
@@ -21,20 +22,14 @@ export const fetchCollectionsFailure = (errorMessage) => ({
 export const fetchCollectionsStartAsync = () => {
 	return (dispatch) => {
 		const collectionRef = firestore.collection("collections");
-		//now that fetchCollectionStart is called will change isFetching to true
 		dispatch(fetchCollectionsStart());
-		// then can start getting snapshot
+
 		collectionRef
 			.get()
 			.then((snapshot) => {
 				const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-				// dispatch fetchCollectionsSuccess here since was able to get collectionsMap now
 				dispatch(fetchCollectionsSuccess(collectionsMap));
-				// since async function call .catch for failure
 			})
-			.catch((error) => {
-				// dispatch fetchCollectionsFailure and will set isFetching to false and pass payload
-				dispatch(fetchCollectionsFailure(error.message));
-			});
+			.catch((error) => dispatch(fetchCollectionsFailure(error.message)));
 	};
 };

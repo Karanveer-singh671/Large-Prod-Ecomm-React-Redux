@@ -2,7 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
-import { fetchCollectionsStartAsync } from "../../redux/shop/shop.actions";
+import { fetchCollectionsStart } from "../../redux/shop/shop.actions";
 import CollectionPageContainer from "../../pages/collection/collection.container";
 import CollectionsOverviewContainer from "../../components/collections-overview/collections-overview.container";
 
@@ -10,10 +10,11 @@ class ShopPage extends React.Component {
 	unsubscribeFromSnapshot = null;
 
 	componentDidMount() {
-		const { fetchCollectionsStartAsync } = this.props;
+		const { fetchCollectionsStart } = this.props;
 		// component mounts so perform the async request here and redux-thunk allowing redux to handle the async event
-		fetchCollectionsStartAsync();
+		fetchCollectionsStart();
 	}
+
 	// isLoading will be the inverted value of isCollectionLoaded for CollectionPageWithSpinner.
 	// If Collection is Loaded then isLoading is false path so need to add a bang in selector
 	render() {
@@ -35,7 +36,7 @@ class ShopPage extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-	fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync()),
+	fetchCollectionsStart: () => dispatch(fetchCollectionsStart()),
 });
 
 export default connect(null, mapDispatchToProps)(ShopPage);

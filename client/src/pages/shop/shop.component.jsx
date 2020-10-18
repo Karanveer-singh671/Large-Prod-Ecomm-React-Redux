@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
-import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import { fetchCollectionsStart } from "../../redux/shop/shop.actions";
 import CollectionPageContainer from "../../pages/collection/collection.container";

@@ -1,13 +1,13 @@
 import React from "react";
 
-import "./sign-in-and-sign-up.jsx";
 import Signin from "../../components/signin/signin.component";
 import SignUp from "../../components/signup/signup.component";
+import { SignInAndSignUpContainer } from "./sign-in-and-sign-up.jsx";
 
 const SignInAndSignUpPage = () => (
-	<div className="sign-in-and-sign-up">
+	<SignInAndSignUpContainer>
 		<Signin />
 		<SignUp />
-	</div>
+	</SignInAndSignUpContainer>
 );
 export default SignInAndSignUpPage;

@@ -11,7 +11,7 @@ import CheckoutItem from "../../components/checkout-item/checkout-item.component
 
 import "./checkout.styles.scss";
 // destructure mapStateToProps props off
-const CheckoutPage = ({ cartItems, total }) => (
+export const CheckoutPage = ({ cartItems, total }) => (
 	<div className="checkout-page">
 		<div className="checkout-header">
 			<div className="header-block">

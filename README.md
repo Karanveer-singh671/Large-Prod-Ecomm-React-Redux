@@ -1,6 +1,6 @@
 ## Production Grade E-Commerce Application Focusing on React, Redux, Firebase, and Latest Useful Libraries
 
-#### Uses Technologies such as: React (clientSide framework), Redux(state management), Styled Components(Prevents CSS name bleeding), Stripe (Payment Integration),Redux-thunk(middleware for async actions) then refactored to Redux-Saga, Firebase, FireStore, Jest, SCSS, some refactoring to hooks,
+#### Uses Technologies such as: React (clientSide framework), Redux(state management), Styled Components, Stripe (Payment Integration),Redux-thunk(middleware for async actions) then refactored to Redux-Saga, Firebase, FireStore, Jest and Enzyme, SCSS, and some refactoring to hooks
 
 #### Features:
 
